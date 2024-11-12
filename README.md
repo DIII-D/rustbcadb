@@ -23,7 +23,7 @@ cd rustbcadb
 poetry install
 cd ..
 ```
-# Use RustBCA to create a database
+## Use rustbcadb to create a database
 
 1. Submit a scan and postprocess database
 
