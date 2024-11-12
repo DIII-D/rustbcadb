@@ -25,8 +25,6 @@ cd ..
 ```
 ## Use rustbcadb to create a database
 
-1. Submit a scan and postprocess database
-
 An example on how to submit a slurm job on the GA cluster Omega to scan sputtering yield and reflection coefficients as a function of energy and angle for various combinations of projectiles and targets is given in `examples/runner.py'. The example must executed in a python session started in the `rust_bca` conda environment
 
 ```python
