@@ -8,21 +8,30 @@ Created on Wed Oct 11 09:21:10 2023
 
 from rustbcadb import *
 
+#show a list of available materials
+show_list_materials()
 
+# directory where database will be built
 directory = '/fusion/projects/boundary/guterlj/RustBCA/database/database_test'
 
+# setup targets and projectiles
 params = {}
-params["target"] = ["tungsten", ]
-params["projectile"] = ["helium"]
+params["target"] = ["tungsten", "carbon"]
+params["projectile"] = ["helium", "deuterium"]
 
-options = {"num_samples": 20000, "path": directory,'N_energy':1, 'N_theta':1}
+# simulation options
+options = {"num_samples": 20000, "path": directory,'N_energy':5, 'Emax':1000, 'N_theta':2}
 
+#Launcher
 launcher = ParallelJobLauncher(directory, overwrite=True)
+#setup header command to load conda environment in sbatch script
 header_commands = ["module purge","module load conda","conda activate rust_bca"]
 
+#setup runs
 launcher.setup_array_runs(params, options=options, header_commands=header_commands)
 
 
+#submit jobto slurm
 slurm_options = {}
 slurm_options['p'] = 'ga-ird'
 # slurm_options['qos'] = 'debug'
