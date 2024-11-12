@@ -1,9 +1,13 @@
 # rustbcadb
 Python package to generate a database of sputtering yield and reflection coefficients with rustbca 
 
-#install
+# install
 
-1. Create a new conda environment
+1. Install poetry systemwide
+
+See instructions here: https://python-poetry.org/docs/
+
+2. Create a new conda environment
 
 Create a new conda/mamba environment named `rust_bca` with the package rust
 ```bash
@@ -11,7 +15,7 @@ Create a new conda/mamba environment named `rust_bca` with the package rust
   mamba activate rust_bca
 ```
 
-2. Install rustbcadb
+3. Install rustbcadb
 
 ```
 git clone https://github.com/DIII-D/rustbcadb
@@ -19,8 +23,9 @@ cd rustbcadb
 poetry install
 cd ..
 ```
+# Use RustBCA to create a database
 
-3. Submit a scan and postprocess database
+1. Submit a scan and postprocess database
 
 An example on how to submit a slurm job on the GA cluster Omega to scan sputtering yield and reflection coefficients as a function of energy and angle for various combinations of projectiles and targets is given in `examples/runner.py'. The example must executed in a python session started in the `rust_bca` conda environment
 
