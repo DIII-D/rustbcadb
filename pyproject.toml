@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "rustbcadb"
+version = "0.1.0"
+description = ""
+authors = ["jguterl <guterlj@fusion.gat.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+rustbca= { git = "https://github.com/lcpp-org/RustBCA"}
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+scan_energy_angle = "rustbcadb.compute_rustbca:scan_energy_angle"
