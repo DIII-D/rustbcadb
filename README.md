@@ -1,7 +1,7 @@
 # rustbcadb
-Python package to generate a database of sputtering yield and reflection coefficients with rustbca 
+rustbcadb is a python package permitting the generation of a database of sputtering yield and reflection coefficients with rustbca on HPC clusters using slurm.
 
-# install
+## Install rustbcadb
 
 1. Install poetry systemwide
 
