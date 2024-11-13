@@ -11,6 +11,7 @@ from libRustBCA import *
 from . import materials
 from .materials import *
 import argparse
+import h5py
 mat_dic = dict((k,v) for (k,v) in vars(materials).items() if not k.startswith('_'))
 
 def get_material(mat_name):
@@ -86,7 +87,7 @@ def scan_energy_angle(projectile=None, target=None, path=None, Emin=1, Emax= 1e4
             np.save(os.path.abspath(path+"/Y_R_{}_{}.npy".format(t["symbol"],p["symbol"])),data)
         return data
 
-def postprocess_database(directory):
+def postprocess_database(directory, ext='h5'):
     log = np.load(os.path.join(directory, "log.npy"), allow_pickle=True).tolist()
     dic ={}
     dic['target'] = [p[0] for p in log['sims_param_array']]
@@ -111,7 +112,41 @@ def postprocess_database(directory):
         except Exception as e:
             print(e)
             print("fail")
-    file = os.path.join(directory,"processed_database.npy")
-    np.save(file, dic)
+    if ext == 'h5':
+        file = os.path.join(directory,"processed_database.h5")
+        dict2hdf5(file, dic)
+    elif ext == 'npy':
+        file = os.path.join(directory,"processed_database.npy")
+        np.save(file, dic)
+    else:
+        raise ValueError('ext must be either npy or h5')
     print("database postprocessed and  dump into {}".format(file))
     return dic
+
+def dict2hdf5(h5filename, dic, debug=False, overwrite=False. mode='w'):
+    with h5py.File(h5filename, mode) as h5file:
+        if verbose: print("writing into h5file :{}".format(h5filename))
+        recursive_dict2hdf5(h5file, '/', dic, debug,overwrite)
+        
+def recursive_dict2hdf5(h5file, path, dic, debug, overwrite):
+    for key, item in dic.items():
+        if debug: print("debug:",key,":", type(item))
+        
+        if not isinstance(key, str):
+            key = str(key)
+        if isinstance(item, list): 
+            item = np.array(item)
+        if overwrite and (path + key) in h5file.keys():
+            del h5file[path + key]
+        
+        if isinstance(item, (np.ndarray, np.int64, np.float64, np.int32, np.float32, str, bytes, int, float)):
+            if debug: print("[",path + key, " ] =  ", item)
+            h5file[path + key] = item
+        elif isinstance(item, dict):
+            recursive_dict2hdf5(h5file, path + key + '/',
+                                item, debug, overwrite)
+        else:
+            print("wrong type for hdf5 dataset : key =",  key , " : type = ", type(item))
+            raise ValueError
+            
+            

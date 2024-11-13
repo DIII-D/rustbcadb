@@ -12,15 +12,15 @@ from rustbcadb import *
 show_list_materials()
 
 # directory where database will be built
-directory = '/fusion/projects/boundary/guterlj/RustBCA/database/database_test'
+directory = '/fusion/projects/boundary/guterlj/RustBCA/database/database_Cr_W_highres'
 
 # setup targets and projectiles
 params = {}
-params["target"] = ["tungsten", "carbon"]
-params["projectile"] = ["helium", "deuterium"]
+params["target"] = ["tungsten", "chromium"]
+params["projectile"] = ["tungsten", "carbon", "helium", "deuterium", "boron", "neon","krypton", "silicon", "argon", "chromium"]
 
 # simulation options
-options = {"num_samples": 20000, "path": directory,'N_energy':5, 'Emax':1000, 'N_theta':2}
+options = {"num_samples": 100000, "path": directory,'N_energy':100, 'Emax':5000, 'N_theta':40}
 
 #Launcher
 launcher = ParallelJobLauncher(directory, overwrite=True)
@@ -50,6 +50,8 @@ slurm_options['n'] = 1
 launcher.sbatch(slurm_options)
 
 ##### to postprocess the database ####:
-# from rustbcadb import *   
-# postprocess_database(directory)
+from rustbcadb import *   
+postprocess_database(directory)
+import hdfdict
+
 

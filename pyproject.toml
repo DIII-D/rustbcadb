@@ -6,9 +6,8 @@ authors = ["jguterl <guterlj@fusion.gat.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.10"
 rustbca= { git = "https://github.com/lcpp-org/RustBCA"}
-
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
