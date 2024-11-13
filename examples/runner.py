@@ -50,8 +50,8 @@ slurm_options['n'] = 1
 launcher.sbatch(slurm_options)
 
 ##### to postprocess the database ####:
-from rustbcadb import *   
-postprocess_database(directory)
-import hdfdict
+# from rustbcadb import *   
+# postprocess_database(directory)
+
 
 

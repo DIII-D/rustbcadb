@@ -122,31 +122,5 @@ def postprocess_database(directory, ext='h5'):
         raise ValueError('ext must be either npy or h5')
     print("database postprocessed and  dump into {}".format(file))
     return dic
-
-def dict2hdf5(h5filename, dic, debug=False, overwrite=False. mode='w'):
-    with h5py.File(h5filename, mode) as h5file:
-        if verbose: print("writing into h5file :{}".format(h5filename))
-        recursive_dict2hdf5(h5file, '/', dic, debug,overwrite)
-        
-def recursive_dict2hdf5(h5file, path, dic, debug, overwrite):
-    for key, item in dic.items():
-        if debug: print("debug:",key,":", type(item))
-        
-        if not isinstance(key, str):
-            key = str(key)
-        if isinstance(item, list): 
-            item = np.array(item)
-        if overwrite and (path + key) in h5file.keys():
-            del h5file[path + key]
-        
-        if isinstance(item, (np.ndarray, np.int64, np.float64, np.int32, np.float32, str, bytes, int, float)):
-            if debug: print("[",path + key, " ] =  ", item)
-            h5file[path + key] = item
-        elif isinstance(item, dict):
-            recursive_dict2hdf5(h5file, path + key + '/',
-                                item, debug, overwrite)
-        else:
-            print("wrong type for hdf5 dataset : key =",  key , " : type = ", type(item))
-            raise ValueError
             
             
