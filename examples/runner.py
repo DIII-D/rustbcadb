@@ -12,15 +12,17 @@ from rustbcadb import *
 show_list_materials()
 
 # directory where database will be built
-directory = '/fusion/projects/boundary/guterlj/RustBCA/database/database_Cr_W_highres'
+directory = '/fusion/projects/boundary/guterlj/RustBCA/database/database_Be_Fe_C_highres'
 
 # setup targets and projectiles
 params = {}
 params["target"] = ["tungsten", "chromium"]
 params["projectile"] = ["tungsten", "carbon", "helium", "deuterium", "boron", "neon","krypton", "silicon", "argon", "chromium"]
+params["target"] = ["beryllium", "iron", "carbon"]
+params["projectile"] = ["tungsten", "carbon", "helium", "deuterium", "boron", "neon","krypton", "silicon", "argon", "chromium", "beryllium", "iron"]
 
 # simulation options
-options = {"num_samples": 100000, "path": directory,'N_energy':100, 'Emax':5000, 'N_theta':40}
+options = {"num_samples": 100000, "path": directory,'N_energy':100, 'Emax':2000, 'N_theta':40}
 
 #Launcher
 launcher = ParallelJobLauncher(directory, overwrite=True)

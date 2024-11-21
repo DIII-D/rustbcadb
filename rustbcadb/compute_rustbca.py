@@ -87,7 +87,7 @@ def scan_energy_angle(projectile=None, target=None, path=None, Emin=1, Emax= 1e4
             np.save(os.path.abspath(path+"/Y_R_{}_{}.npy".format(t["symbol"],p["symbol"])),data)
         return data
 
-def postprocess_database(directory, ext='h5'):
+def postprocess_database(directory, ext='npy'):
     log = np.load(os.path.join(directory, "log.npy"), allow_pickle=True).tolist()
     dic ={}
     dic['target'] = [p[0] for p in log['sims_param_array']]
