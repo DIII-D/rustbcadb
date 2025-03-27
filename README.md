@@ -11,7 +11,7 @@ See instructions here: https://python-poetry.org/docs/
 
 Create a new conda/mamba environment named `rust_bca` with the package rust
 ```bash
-  mamba create -n rust_bca python =3.10 rust```
+  mamba create -n rust_bca python=3.10 rust
   mamba activate rust_bca
 ```
 
